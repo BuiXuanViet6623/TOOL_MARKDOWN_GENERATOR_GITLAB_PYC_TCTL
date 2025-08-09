@@ -238,9 +238,9 @@ TEMPLATES = [
 
 以下是您当前可用的访问入口，强烈建议收藏多个备用链接，以防主链路出现故障：
 
-- [主站入口]({domain})  
-- [备用链接一]({domain})  
-- [备用链接二]({domain})  
+- [👉👉主站入口👈👈]({domain})  
+- [👉👉备用链接一👈👈]({domain})  
+- [👉👉备用链接二👈👈]({domain})  
 
 📌 我们的优势：
 - 实时监测所有链接状态，确保每条链接均可正常访问，杜绝失效情况。
@@ -450,8 +450,8 @@ TEMPLATES = [
 
 主要访问入口：
 - [主链接]({domain})
-- [备用链接一]({domain})
-- [备用链接二]({domain})
+- [👉👉备用链接一👈👈]({domain})
+- [👉👉备用链接二👈👈]({domain})
 
 平台特色：
 - 访问稳定安全，杜绝病毒和广告骚扰。
@@ -604,3 +604,4 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     print(f"🚀 Server running on port {port}")
     app.run(host="0.0.0.0", port=port, debug=False)
+
