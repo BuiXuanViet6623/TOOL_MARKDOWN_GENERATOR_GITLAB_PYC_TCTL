@@ -557,17 +557,14 @@ def generate_markdown_files():
         used_filenames = set()
         created_files = []
 
-        app_fixed = random.choice(FIXED_APPS)
-        url_fixed = random.choice(FIXED_URLS)
-
-        # Lấy 1 từ khóa chính random cho tất cả các file lần này
-        primary_keyword = random.choice(PRIMARY_KEYWORDS)
 
         selected_keywords = keywords
-
         memory_zip = io.BytesIO()
         with zipfile.ZipFile(memory_zip, mode="w", compression=zipfile.ZIP_DEFLATED) as zf:
             for keyword in selected_keywords:
+                app_fixed = random.choice(FIXED_APPS)
+                url_fixed = random.choice(FIXED_URLS)
+                primary_keyword = random.choice(PRIMARY_KEYWORDS)
                 safe_keyword = sanitize_filename(keyword)
                 filename = f"{safe_keyword}.md"
 
@@ -609,5 +606,3 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     print(f"🚀 Server running on port {port}")
     app.run(host="0.0.0.0", port=port, debug=False)
-
-
