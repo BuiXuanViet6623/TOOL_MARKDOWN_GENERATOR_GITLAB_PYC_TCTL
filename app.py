@@ -511,6 +511,7 @@ def generate_md_content(app, url, keyword_list, suffix, primary_keyword=None):
         primary_keyword = random.choice(PRIMARY_KEYWORDS)
 
     title = f"{primary_keyword} - {app} - {url} - {'-'.join(keyword_list)} - {suffix}"
+    fileName = f"{primary_keyword} - {app} - {url} - {'-'.join(keyword_list)} "
     date_now = datetime.datetime.now().strftime("%Y-%m-%d")
     keywords_text = "，".join(keyword_list)
     subdomain = ''.join(random.choices('abcdefghijklmnopqrstuvwxyz0123456789', k=3))
@@ -565,22 +566,25 @@ def generate_markdown_files():
                 app_fixed = random.choice(FIXED_APPS)
                 url_fixed = random.choice(FIXED_URLS)
                 primary_keyword = random.choice(PRIMARY_KEYWORDS)
-                safe_keyword = sanitize_filename(keyword)
-                filename = f"{safe_keyword}.md"
 
-                # Tránh trùng tên file
-                original_filename = filename
-                count = 1
-                while filename in used_filenames:
-                    filename = f"{safe_keyword}_{count}.md"
-                    count += 1
-                used_filenames.add(filename)
-
+                # Xây dựng danh sách keyword trước để đặt tên file theo mẫu yêu cầu
                 other_keywords = random.sample(keywords, min(2, len(keywords)))
                 if keyword not in other_keywords:
                     keyword_list = [keyword] + other_keywords
                 else:
                     keyword_list = other_keywords
+
+                # Đặt tên file theo mẫu: "{primary_keyword} - {app} - {url} - {'-'.join(keyword_list)}.md"
+                title_base = f"{primary_keyword} - {app_fixed} - {url_fixed} - {'-'.join(keyword_list)}"
+                safe_base = sanitize_filename(title_base)
+                filename = f"{safe_base}.md"
+
+                # Tránh trùng tên file
+                count = 1
+                while filename in used_filenames:
+                    filename = f"{safe_base}_{count}.md"
+                    count += 1
+                used_filenames.add(filename)
 
                 content = generate_md_content(app_fixed, url_fixed, keyword_list, suffix, primary_keyword=primary_keyword)
                 zf.writestr(filename, content)
